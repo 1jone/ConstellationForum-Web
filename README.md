@@ -16,7 +16,7 @@ ASP.NET MVC、SQL Server Express LocalDB、jQuery、Bootstrap、CSS特效、图�
 2、未注册账号，可以先“注册”一个账号，然后再进行登陆
 
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/3.png)
-
+  
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/4.png)
 
 3、进入网站，在未登陆的情况下，只能查看文章，没有留言和提交文章的权限
