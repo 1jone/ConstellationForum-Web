@@ -3,6 +3,7 @@
 一、系统功能说明
 ==================
 该系统为星座主题论坛。该系统采用ASP.NET MVC框架，系统具有登录、注册、以及注销功能，具有概要展示文章信息功能，文章分类功能，文章上传功能，文章评论功能以及删除文章功能。该系统具有管理员和一般用户两类用户，管理员具有所有功能的使用权限；一般用户不具有文章的删除权限，其它权限都有。
+
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/1.png)
 
 二、使用的技术
@@ -15,10 +16,10 @@ ASP.NET MVC、SQL Server Express LocalDB、jQuery、Bootstrap、CSS特效、图�
 
 2、未注册账号，可以先“注册”一个账号，然后再进行登陆
 
-![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/3.png)
-  
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/4.png)
 
+![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/3.png)
+  
 3、进入网站，在未登陆的情况下，只能查看文章，没有留言和提交文章的权限
 
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/2.png)
