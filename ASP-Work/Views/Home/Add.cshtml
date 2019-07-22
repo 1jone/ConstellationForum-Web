@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "新闻投稿";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .layui-input-block {
+        margin: 0;
+    }
+</style>
+<script type="text/javascript">
+
+    function checktitle() {
+        var title = document.getElementById("ArticleTitle").value;
+        if (title.length < 5) {
+            document.getElementById("tip_title").innerHTML = "<em style='color:#FF0000'>标题不得少于5个字符哦！</em>";
+            document.getElementById("ArticleTitle").focus();
+        };
+        if (title.length >= 5) {
+            document.getElementById("tip_title").innerHTML = "";
+        }
+    };
+
+    function checkurl() {
+        var url = document.getElementById("source").value;
+        if (url != "") {
+            var reg = /^((https|http|ftp|rtsp|mms){0,1}(:\/\/){0,1})www\.(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+            if (!reg.test(url)) {
+                document.getElementById("tip_url").innerHTML = "<em style='color:#FF0000'>网页地址链接格式有误！</em>";
+                document.getElementById("source").focus();
+            }
+            if (reg.test(url)) {
+                document.getElementById("tip_url").innerHTML = "";
+            }
+        }
+        if (url == "") {
+            document.getElementById("tip_url").innerHTML = "";
+        }
+    }
+
+    function checkcontent() {
+        var content = document.getElementById("content").value;
+        if (content != "") {
+            document.getElementById("tip_content").innerHTML = "";
+        }
+    }
+    window.onload = function () {
+        var fm = document.getElementsByTagName('form')[0];
+        fm.onsubmit = function () {
+            //密码验证
+            if (fm.title.value == "") {
+                document.getElementById("tip_title").innerHTML = "<em style='color:#FF0000'>标题不得为空</em>";
+                document.getElementById("ArticleTitle").focus();
+                return false;
+            }
+            if (fm.content.value == "") {
+                document.getElementById("tip_content").innerHTML = "<em style='color:#FF0000'>新闻内容不能为空哦！</em>";
+                document.getElementById("content").focus();
+                return false;
+            }
+        };
+    }
+    $(function () {
+        $("#submitButton").click(function () {
+            $.post('@Url.Action("Add", "Home")', { Title: title, Url: url, Content: content });
+
+        });
+    })
+
+</script>
+
+<div class="page-title" unselectable="on" onselectstart="return false;">
+    <div class="layui-container">
+        <div class="title">
+            <h2>
+                文章投稿
+                <span class="line"></span>
+            </h2>
+        </div>
+        <span class="title-eng">ADD ANCHOR</span>
+    </div>
+</div>
+<div class="page-news" style="margin:0 0 25px 0">
+    <div class="layui-container">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md2">
+            </div>
+            <div class="layui-col-md8">
+                <div class="moudle-card">
+                    <div class="page-form layui-text">
+                        <div class="layui-form">
+                            <form method="post" id="form">
+                                @Html.AntiForgeryToken()
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" placeholder="请输入投稿标题" id="ArticleTitle" name="title" onblur="checktitle()">
+                                    </div>
+                                    <span id="tip_title" style="color:red"></span>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" placeholder="如果是转载, 请输入来源..例如:百度百科|https://www.baidu.com" id="source" name="source" onblur="checkurl()">
+                                    </div>
+                                </div>
+                                <span id="tip_url"></span>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <textarea class="layui-textarea" rows="10" placeholder="请输入新闻内容" id="content" name="content" onblur="checkcontent()" style="resize:none"></textarea>
+                                    </div>
+                                </div>
+                                <span id="tip_content"></span>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button id="submitButton" class="layui-btn zb-btn" lay-filter="articleadd" lay-submit> 提交 </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md2">
+    </div>
+</div>
+
+
+
+
+

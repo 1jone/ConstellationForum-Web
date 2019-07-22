@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ASP_Work.Models.W_ArticleComments>
+@{
+    var articleid = ViewBag.Id;
+}
+
+
+<div class="news-con">
+    <div class="page-anchor-contect">
+        <div class="moudle-card">
+            <div class="anchor-contect-con">
+                <div class="page-anchor">
+                    <div class="layui-row layui-form" id="articlecoment">
+                        <ul class="layui-timeline layui-anim layui-anim-up">
+                            <li class="layui-timeline-item "></li>
+                            @*@if (Model.IsSuccess)
+                                {*@
+                            @foreach (var item in Model)
+                            {
+                                if (item.Content != null)
+                                {
+                                    <li class="layui-timeline-item" style="padding-bottom:10px;">
+                                        <h4 class="left-tt">@item.User</h4><i class="layui-icon layui-timeline-axis"></i>
+                                        <div class="layui-timeline-content right-con">
+                                            <a style="color: #000; border-bottom:0;">
+                                                <div class="p-hide" style="width:30px;height:30px;border-radius:50%;overflow:hidden;display:inline-block"><img width="30px" /> </div>
+                                                <span class="p-hide" style="display:inline-block;position:relative;top: -10px;">&nbsp; </span>
+                                            </a>
+                                            <p>@item.Content</p>
+                                            <p class="time">@item.TimeAgo</p>
+                                        </div>
+                                    </li>
+
+
+                                }
+
+                            }
+                            <li class="layui-timeline-item "></li>
+                        </ul>
+                        @if (Session["name"] == null)
+                        {
+                            <div class="panel foot-tip">
+                                <span style="color:dimgray;font-size:12px; ">如果想要留言，欢迎点击<a href="@Url.Action("Login","Home")" style="color:#f84b9c;font-size:16px;">登录</a>。</span>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (Session["name"] != null)
+{
+
+    <div class="news-con">
+        <div class="page-anchor-contect">
+            <div class="moudle-card">
+                <div class="anchor-contect-con">
+                    <div class="page-anchor">
+                        <div class="layui-row layui-form">
+                            <form method="post">
+                                <input type="hidden" value="@articleid" name="id" id="id" />
+                                <ul class="layui-timeline">
+                                    <li class="layui-timeline-item"></li>
+                                    <li class="layui-timeline-item">
+                                        <h4 class="left-tt">内容</h4>
+                                        <i class="layui-icon layui-timeline-axis"></i>
+                                        <div class="layui-timeline-content right-con">
+                                            <textarea name="content" id="content" rows="4" class="layui-textarea" placeholder="说点什么吧"></textarea>
+                                        </div>
+                                    </li>
+                                    <li class="layui-timeline-item">
+                                        <div class="layui-timeline-content right-con name-input">
+                                            <button id="submitButton" class="layui-btn zb-btn" lay-filter="articlereply" lay-submit> 发表评论 </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<script src="~/Content/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#submitButton").click(function () {
+            var data = $('#content').val();
+            $.post('@Url.Action("LoadComment", "Home")', { frontViewData: data,Id:@articleid});
+        });
+    })
+
+</script>

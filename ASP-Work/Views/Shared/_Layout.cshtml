@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Static/img/constellation.png" type="image/x-icon" />  <!-- 修改小图标 -->
+    @Styles.Render("~/Content/themes/base/jquery-ui")
+
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/Static/css/style.css" rel="stylesheet" />
+
+    <!--layui-->
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jquery/unobtrusive-ajax")
+    @Scripts.Render("~/bundles/jquery/validate")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <style>
+        body {
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        #demo {
+            margin-right: -15px;
+            margin-bottom: 2px;
+        }
+
+            #demo .list-group-item {
+                font-size: 14px;
+                margin-left: -33px;
+                margin-right: -33px;
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+
+            #demo list-group-item:first-child {
+                margin-top: -15px;
+            }
+
+            #demo .list-group-item:last-child {
+                margin-bottom: -15px;
+            }
+
+        li {
+            margin-right: 10px;
+        }
+
+        #header {
+            height: 70px;
+            width: 100%;
+            background-color: #393D49;
+        }
+
+        .login-and-regist {
+            height: 24px;
+            line-height: 10px;
+            background-color: #1E9FFF;
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <ul class="layui-nav layui-layout-body" style="margin-left:12%">
+            <li style="position: relative;display: inline-block;line-height: 60px">
+                <img src="~/Static/img/logo.png" style="height:50px;width:50px" />
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("首页", "Index", "Home", new { area = "" }, new { @class = "" })
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("星座", "Category", "Home", new { id = "1" }, new { @class = "" })
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("生肖", "Category", "Home", new { id = "2" }, new { @class = "" })
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("爱情", "Category", "Home", new { id = "3" }, new { @class = "" })
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("时尚", "Category", "Home", new { id = "4" }, new { @class = "" })
+                </a>
+            </li>
+            <li class="layui-nav-item">
+                <a>
+                    @Html.ActionLink("知识", "Category", "Home", new { id = "5" }, new { @class = "" })
+                </a>
+            </li>
+        </ul>
+
+        <ul class="layui-nav layui-layout-right" style="margin-right:12%">
+            @if (Session["name"] == null)
+            {
+                <li style="position: relative;display: inline-block;line-height: 60px">
+                    <button class="btn btn-block btn-info" style="height:30px;margin-top:15px;border-radius:30px">
+                        @Html.ActionLink("登录", "Login", "Home", new { area = "" }, new { @class = "" })
+                    </button>
+                </li>
+                <li style="position: relative;display: inline-block;line-height: 60px">
+                    <button class="btn btn-block btn-info" style="height:30px;margin-top:15px;border-radius:30px">
+                        @Html.ActionLink("注册", "Register", "Home", new { area = "" }, new { @class = "" })
+                    </button>
+                </li>
+            }
+        </ul>
+        <ul class="layui-nav layui-layout-right" style="margin-right:12%">
+            @if (Session["name"] != null)
+            {
+                <li style="position: relative;display: inline-block;line-height: 60px">
+                    <a style="height:30px;width:50px;margin-right:20px;margin-top:15px;color:white">
+                        用户:[ @Session["name"].ToString() ]
+                    </a>
+                </li>
+                <li style="position: relative;display: inline-block;line-height: 60px">
+                    <button class="btn btn-block btn-info" style="height:30px;margin-top:15px;border-radius:30px">
+                        @Html.ActionLink("注销", "Destroy", "Home")
+                    </button>
+                </li>
+
+            }
+
+            @if (Session["flag"] != null)
+            {
+                if (Session["flag"].ToString() == "1")
+                {
+                    <li style="position: relative;display: inline-block;line-height: 60px">
+                        <button class="btn btn-block btn-info" style="height:30px;margin-top:15px;border-radius:30px">
+                            @Html.ActionLink("管理", "Index", "Admin", new { area = "" }, new { @class = "" })
+                        </button>
+                    </li>
+
+                }
+
+            }
+        </ul>
+
+
+    </div>
+
+    <div id="bodycon">
+        @RenderBody()
+    </div>
+
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+    </script>
+
+</body>
+</html>

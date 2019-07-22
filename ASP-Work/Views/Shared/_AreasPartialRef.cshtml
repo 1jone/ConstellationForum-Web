@@ -1,0 +1,41 @@
+﻿@Styles.Render("~/Content/themes/base/jquery-ui")
+
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<style>
+    body {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    #demo {
+        margin-right: -15px;
+        margin-bottom: 2px;
+    }
+
+        #demo .list-group-item {
+            font-size: 14px;
+            margin-left: -33px;
+            margin-right: -33px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+
+        #demo list-group-item:first-child {
+            margin-top: -15px;
+        }
+
+        #demo .list-group-item:last-child {
+            margin-bottom: -15px;
+        }
+</style>
+
+
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/jquery/unobtrusive-ajax")
+@Scripts.Render("~/bundles/jquery/validate")
+@Scripts.Render("~/bundles/bootstrap")
+

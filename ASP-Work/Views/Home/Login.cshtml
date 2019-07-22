@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "用户登录";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    body {
+        padding: 0px;
+    }
+
+    .body {
+        background-image: url('/Content/img/ye.jpg');
+        height: 100%;
+        background-position: 50%;
+        background-size: cover;
+        justify-content: center;
+        padding: 10% 0;
+    }
+
+    .moudle-card {
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+
+        .moudle-card img {
+            transform: scale(1) !important;
+        }
+</style>
+
+<script src="~/Content/static/js/jquery.min.js"></script>
+
+<script>
+   
+    function checkpnumber() {
+        var pnumber = document.getElementById("mobile").value;
+        //手机号正则
+        var p = /^1[34578]\d{9}$/;
+        //电话
+        if (document.getElementById("pnumber").value == null ){
+            document.getElementById("tips_pnumber").innerHTML = "<em style='color:#FF0000'>手机号不能为空</em>";
+            document.getElementById("mobile").focus();
+        } else {
+            if (@Session["name"] == null) {
+                document.getElementById("tips_pnumber").innerHTML = "<em style='color:#FF0000'>账户名或者密码错误</em>"
+            } else {
+                document.getElementById("tips_pnumber").innerHTML = "";
+            }
+
+
+        }
+    }
+    function checkPass1() {
+        //正则表达式，由字母、数字和下划线组成。
+        var reg = /[^A-Za-z0-9_]+/;
+        var regs = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
+        //判断密码长度，是否符合规则。
+        if (document.getElementById("pass").value == "") {
+            document.getElementById("tips_password").innerHTML = "<em style='color:#FF0000'>密码不能为空</em>"
+            document.getElementById("pass").focus();
+        } else {
+            document.getElementById("tips_password").innerHTML = "132156";
+        }
+
+    }
+    $(function () {
+        $("#submitBtn").click(function () {
+            var pnumber = document.getElementById("mobile").value;
+            var Pass = document.getElementById("pass").value;
+
+            $.post('@Url.Action("Login", "Home")', { PhoneNumber: pnumber, Pass: Pass }
+
+            );
+        })
+    })
+
+</script>
+<div class="body">
+    <div class="page-title" unselectable="on" onselectstart="return false;">
+        <div class="layui-container">
+            <div class="title">
+            </div>
+            <span class="title-eng">LOGIN</span>
+        </div>
+    </div>
+    <div class="page-news page-bbs">
+        <div class="layui-container">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md3">
+                </div>
+                <div class="layui-col-md6">
+                    <div class="moudle-card">
+                        <div class="page-form layui-text">
+                            <div class="layui-form bbs-user">
+                                <form id="form" method="post" onsubmit="return checkForm()">
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><span style="color:#f84b9c">*</span>手机号</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" class="layui-input" placeholder="你的登录账号" name="PhoneNumber" lay-verify="phone" id="mobile" onblur="checkpnumber()" autocomplete="off">
+                                            <span id="tips_pnumber"></span>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="password" class="layui-input" placeholder="密码" id="pass" name="pass" onblur="checkPass1()" lay-verify="required">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="text-align:center;margin-bottom:0px; ">
+
+                                        <button id="submitBtn" class="layui-btn zb-btn" lay-filter="formDemo" lay-submit>登录</button>
+
+                                        <a class="layui-btn zb-btn" href="@Url.Action("Register","Home")">注册</a>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

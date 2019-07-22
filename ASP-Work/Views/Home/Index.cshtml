@@ -1,0 +1,181 @@
+﻿@model IEnumerable<ASP_Work.Models.W_Articles>
+@{
+    ViewBag.Title = "首页|打造好玩的星座平台";
+    var action = Url.Action("index", "Home");
+    var ajaxOptions = new AjaxOptions();
+    var c3 = new { @style = "color:red;" };
+    var name = ViewBag.name;
+
+}
+<style>
+    .anchor-img img {
+        height: inherit;
+    }
+
+    .content-title-title {
+        font-size: 16px;
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        margin-right: 35px;
+    }
+
+    .content-title p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        margin-bottom: 12px;
+    }
+
+    .scroll-container {
+        transition: 1s all ease;
+    }
+
+    .swiper-button-next {
+        width: 32px;
+        height: 66px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .swiper-button-prev {
+        width: 32px;
+        height: 66px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .consult-icon {
+        font-size: 25px;
+        line-height: 66px;
+        margin: 0 auto;
+        color: #f84b9c;
+    }
+
+    .layui-container {
+        margin: 0 auto 20px;
+    }
+
+    .content-img img {
+        cursor: pointer;
+        transition: all 0.6s;
+    }
+
+        .content-img img:hover {
+            transform: scale(1.3);
+        }
+
+    .moudle-cards:hover {
+        box-shadow: 4px 4px 1px 1px #707070;
+    }
+</style>
+<link href="~/Static/css/Cooldog.css" rel="stylesheet" />
+<link href="~/Static/css/iconfont.css" rel="stylesheet" />
+<script src="~/Static/js/jquery.min.js"></script>
+<script src="~/Static/js/Cooldog.js"></script>
+
+<div class="Cooldog_container">
+    <div class="Cooldog_content">
+        <ul>
+            <li class="p1">
+                <a href="#">
+                    <img src="~/Static/img/1.png" alt="">
+                </a>
+            </li>
+            <li class="p2">
+                <a href="#">
+                    <img src="~/Static/img/2.png" alt="">
+                </a>
+            </li>
+            <li class="p3">
+                <a href="#">
+                    <img src="~/Static/img/3.png" alt="">
+                </a>
+            </li>
+            <li class="p4">
+                <a href="#">
+                    <img src="~/Static/img/4.png" alt="">
+                </a>
+            </li>
+            <li class="p5">
+                <a href="#">
+                    <img src="~/Static/img/5.png" alt="">
+                </a>
+            </li>
+            <li class="p5">
+                <a href="#">
+                    <img src="~/Static/img/6.png" alt="">
+                </a>
+            </li>
+            <li class="p5">
+                <a href="#">
+                    <img src="~/Static/img/7.png" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a href="javascript:;" class="btn_left">
+        <i class="iconfont icon-zuoyoujiantou"></i>
+    </a>
+    <a href="javascript:;" class="btn_right">
+        <i class="iconfont icon-zuoyoujiantou-copy-copy"></i>
+    </a>
+    <a href="javascript:;" class="btn_close">
+        <i class="iconfont icon-icon-test"></i>
+    </a>
+    <div class="buttons clearfix">
+        <a href="javascript:;" class="color"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+    </div>
+</div>
+
+<div id="body" class="layui-container" style="width:100% !important">
+    <div class="page-index">
+        <div class="layui-col-space20">
+            <div class="container" style="padding-top:70px;padding-left:120px;">
+                <div class="layui-container layui-row news-side" style="margin-left:-12%">
+                    <div class="in-title">
+                        <h2>文章阅读</h2>
+                        <span class="line"></span>
+                    </div>
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="layui-col-md6 layui-col-xs12" style="position:relative;padding:5px;">
+                            <div class="moudle-cards" style="overflow:hidden;border-radius:7px;background-color:#fff;height:130px">
+                                <a href="@Url.Action("Detial", "Home", new { articleid = @item.Id })" style="text-decoration:none;">
+                                    <div class="content-img" style="float:left;overflow:hidden;width:100px;height:100px;margin:15px 10px;">
+                                        <img src="@item.ImgUrl.Replace('|',' ')" style="width:100px;" />
+                                    </div>
+                                    <div class="content-title" style="margin:15px 0">
+                                        <div class="content-title-title" style="color: #000;text-align: left;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">@item.Title</div>
+                                        <p>@item.Brief</p>
+                                        <label style="color:#f84b9c"># @item.Label</label>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

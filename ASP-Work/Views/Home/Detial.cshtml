@@ -1,0 +1,52 @@
+﻿@model ASP_Work.Models.W_Articles
+@{
+    ViewBag.Title = Model.Title;
+}
+<style>
+    .moudle-card:hover img {
+        transform: scale(1);
+    }
+
+    .page-news .news-con {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="page-news">
+    <div class="layui-container">
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-xs12 layui-col-md9" style="margin-left:12%">
+                <div class="news-con">
+                    <div class="moudle-card">
+                        <h1>@Model.Title<span style="font-size: 12px;color: #f84b9c;float: right;font-weight:initial"><img src="~/Static/img/人气.png" style="height:22%;width:22%;margin-top:-10px;" title="人气" /><i title="人气" style="font-size: 20px;position: relative;top: -3px;"></i> @Model.Hits <i class="iconfont" title="回答"></i> @Model.CommentCount </span></h1>
+                        <div class="panel">
+                            <input type="hidden" value="@Model.Id" id="hidearticleid" />
+                            <span>编辑:<a>@Model.TUserName</a></span>
+                            <span>发布日期: <span style="color:#f84b9c">@Model.AddTime.ToString()</span></span>
+                            @if (Model.Source != null && Model.Source.Contains('|'))
+                            {
+                                <span>来源: <a href="@Model.Source.Split('|')[1]" target="_blank" style="color:#f84b9c">@Model.Source.Split('|')[0]</a></span>
+                            }
+                            <span>
+                                类别:
+                                <span style="color:#f84b9c">
+                                    <a style="color:#f84b9c">@Model.ArticleCategory</a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="line"><span class="s"></span></div>
+                        <div class="con layui-text">
+                            @Html.Raw(@Model.Content)
+                        </div>
+                        <div class="line"></div>
+                        <div class="panel foot-tip">
+                            <span>如果您有好的新闻与建议，欢迎点击<a href="@Url.Action("Add","Home")" style="color:#f84b9c;font-size:16px;">文章投稿</a>。</span>
+                        </div>
+                    </div>
+                </div>
+
+                @{Html.RenderAction("LoadComment", new { id = Model.Id });}
+
+            </div>
+        </div>
+    </div>
+</div>
