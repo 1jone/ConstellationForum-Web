@@ -16,7 +16,7 @@ ASP.NET MVC、SQL Server Express LocalDB、jQuery、Bootstrap、CSS特效、图�
 
 2、未注册账号，可以先“注册”一个账号，然后再进行登陆
 
-![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/4.png)
+![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/4.jpg)
 
 ![image](https://github.com/1jone/ConstellationForum-Web/blob/master/images/3.png)
   
